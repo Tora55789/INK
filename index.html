@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Ink Frames Studio - Envoi Email FORMSPREE FINAL</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1F4E78 0%, #2a5a9c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #1F4E78;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #1F4E78;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .email-config {
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        
+        .email-config h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .email-config p {
+            color: #1b5e20;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .section h2 {
+            font-size: 22px;
+            color: #1F4E78;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f39c12;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #1F4E78;
+            box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.1);
+        }
+        
+        .prospects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 6px;
+            background: #f9f9f9;
+        }
+        
+        .prospect-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-left: 4px solid #f39c12;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .prospect-checkbox:hover {
+            background: #f0f4f8;
+            border-left-color: #1F4E78;
+            transform: translateX(5px);
+        }
+        
+        .prospect-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .prospect-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .prospect-email {
+            font-weight: 600;
+            color: #1F4E78;
+            font-size: 13px;
+        }
+        
+        .prospect-company {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .prospect-type {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            grid-column: 1 / -1;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f5e9 100%);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #2e7d32;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1F4E78;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2e7d32 0%, #f39c12 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        .log-box {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .log-item {
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .log-item:last-child {
+            border-bottom: none;
+        }
+        
+        .log-time {
+            color: #999;
+            min-width: 60px;
+            font-weight: 600;
+        }
+        
+        .log-success { color: #2e7d32; }
+        .log-error { color: #e74c3c; }
+        .log-info { color: #1976d2; }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            border-left: 4px solid #2e7d32;
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .prospects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>📧 Ink Frames Studio</h1>
+                <p>Envoie tes emails de prospection EN DIRECT avec FORMSPREE! 🚀</p>
+            </div>
+            
+            <div class="email-config">
+                <h3>✉️ Configuration FORMSPREE GRATUITE:</h3>
+                <p>📧 Email: inkframesstudio@gmail.com</p>
+                <p>🔑 Form ID: mzdwrrza</p>
+                <p>🌍 Service: FORMSPREE (100% gratuit, pas de limite)</p>
+                <p>⚡ Status: <span class="status-badge">🟢 CONNECTÉ & PRÊT</span></p>
+            </div>
+            
+            <div class="alert">
+                ✅ <strong>BONUS:</strong> Avec FORMSPREE, c'est GRATUIT! Pas de limite de domaine, pas de config complexe. Juste clique et envoie!
+            </div>
+            
+            <div id="alerts"></div>
+            
+            <div class="grid">
+                <!-- SECTION GAUCHE: SÉLECTION PROSPECTS -->
+                <div class="section">
+                    <h2>👥 Sélectionne tes prospects</h2>
+                    
+                    <div class="form-group">
+                        <label>🔍 Chercher par email ou entreprise...</label>
+                        <input type="text" id="searchInput" placeholder="Ex: Coiffure, contact@..." onkeyup="filterProspects()">
+                    </div>
+                    
+                    <div id="prospectsList" class="prospects-grid">
+                        <p style="text-align: center; color: #999; grid-column: 1/-1;">Chargement des prospects...</p>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn-secondary" onclick="selectAll()">✓ Tous</button>
+                        <button class="btn-danger" onclick="deselectAll()">✗ Aucun</button>
+                    </div>
+                </div>
+                
+                <!-- SECTION DROITE: STATISTIQUES & LOGS -->
+                <div class="section">
+                    <h2>📊 Résumé d'envoi</h2>
+                    
+                    <div class="stats">
+                        <div class="stat-box">
+                            <div class="stat-number" id="totalCount">0</div>
+                            <div class="stat-label">Prospects</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="selectedCount">0</div>
+                            <div class="stat-label">Sélectionnés</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="sentCount">0</div>
+                            <div class="stat-label">Envoyés</div>
+                        </div>
+                    </div>
+                    
+                    <h2 style="margin-top: 30px;">📋 Journal d'envoi</h2>
+                    <div class="log-box" id="logBox"></div>
+                </div>
+            </div>
+            
+            <!-- SECTION FULL WIDTH: BOUTON D'ENVOI -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">0%</div>
+            </div>
+            
+            <button class="btn-primary" id="sendBtn" onclick="sendAllEmails()" disabled>
+                🚀 ENVOYER LES EMAILS (0 sélectionnés)
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // FORMSPREE CONFIG - TON FORM ID PERSONNEL
+        const FORMSPREE_ID = 'mzdwrrza';
+        const FORMSPREE_URL = 'https://formspree.io/f/' + FORMSPREE_ID;
+        
+        // 29 PROSPECTS
+        const PROSPECTS_DATA = [
+            { email: "contact@latelier-toulouse.fr", name: "L'Atelier Coiffure", company: "Beauté - Coiffeur", type: "EMAIL" },
+            { email: "authenticcoiffuretoulouse@gmail.com", name: "Authentic Coiffure Carmes", company: "Beauté - Coiffeur", type: "EMAIL" },
+            { email: "authenticcoiffurestcyprien@gmail.com", name: "Authentic Coiffure Cyprien", company: "Beauté - Coiffeur", type: "EMAIL" },
+            { email: "lazorthescoiffure@gmail.com", name: "LAZORTHES Coiffure", company: "Beauté - Coiffeur", type: "EMAIL" },
+            { email: "torregrosa.theophile@orange.fr", name: "Le Salon de Théophile", company: "Beauté - Coiffeur", type: "EMAIL" },
+            { email: "@madamsansgene", name: "Madame sans gêne", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@lincontournable.beauty", name: "L'Incontournable Beauty", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@myhair_bymelanie", name: "My Hair by Melanie", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@diloyscoiffure", name: "Diloy's Coiffure", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@coiffclub.toulouse", name: "Coiff Club", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@ema.coiffeur.toulouse", name: "EMA Coiffeur", company: "Beauté - Coiffeur", type: "INSTAGRAM" },
+            { email: "@lacuisinedejean", name: "La Cuisine de Jean", company: "Restauration", type: "INSTAGRAM" },
+            { email: "@feelrealgoodorlouse", name: "Feel Real Good", company: "Restauration", type: "INSTAGRAM" },
+            { email: "contact@coupdefourchette.fr", name: "Coup de Fourchette", company: "Restauration", type: "EMAIL" },
+            { email: "@lamaisondeleatolouse", name: "La Maison de Léa", company: "Restauration", type: "INSTAGRAM" },
+            { email: "@streetfood.toulouse", name: "Street Food Truck", company: "Restauration", type: "INSTAGRAM" },
+            { email: "@brasseriecentro.toulouse", name: "Brasserie Centro", company: "Restauration", type: "INSTAGRAM" },
+            { email: "@cafebeauxarts.tls", name: "Café Beaux-Arts", company: "Restauration", type: "INSTAGRAM" },
+            { email: "@institutbeautetoulouse", name: "Institut Beauté Toulouse", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@laure.nails.toulouse", name: "Onglerie Laure Toulouse", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@sun.detente.toulouse", name: "Sun Détente", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@massage.thai.toulouse", name: "Massage Thaï", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@centre.esthetique.plus", name: "Centre Esthétique Plus", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@soins.visage.bio.toulouse", name: "Soins du Visage Bio", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@manucure.toulouse", name: "Manucure-Pédicure Studio", company: "Beauté - Institut", type: "INSTAGRAM" },
+            { email: "@peinture.deco.toulouse", name: "Peinture & Décoration", company: "BTP - Peinture", type: "INSTAGRAM" },
+            { email: "contact@menuiserie-toulouse.fr", name: "Menuiserie Artisan", company: "BTP - Menuiserie", type: "EMAIL" },
+            { email: "@couverture.toulouse", name: "Couverture Toiture", company: "BTP - Couverture", type: "INSTAGRAM" },
+            { email: "@thefork.toulouse", name: "The Fork Toulouse", company: "Restauration", type: "INSTAGRAM" },
+        ];
+        
+        let prospects = [];
+        let selectedProspects = new Set();
+        let isSending = false;
+        
+        function initProspects() {
+            prospects = PROSPECTS_DATA.map((p, i) => ({
+                id: i,
+                email: p.email,
+                name: p.name,
+                company: p.company,
+                type: p.type
+            }));
+            document.getElementById('totalCount').textContent = prospects.length;
+            renderProspects();
+            addLog('✅ ' + prospects.length + ' prospects chargés', 'success');
+            addLog('🔑 FORMSPREE ID: ' + FORMSPREE_ID, 'success');
+            addLog('🌍 URL: ' + FORMSPREE_URL, 'info');
+        }
+        
+        function renderProspects(filter = '') {
+            const container = document.getElementById('prospectsList');
+            const filtered = prospects.filter(p => 
+                p.email.toLowerCase().includes(filter.toLowerCase()) ||
+                p.company.toLowerCase().includes(filter.toLowerCase()) ||
+                p.name.toLowerCase().includes(filter.toLowerCase())
+            );
+            
+            container.innerHTML = filtered.map(p => `
+                <div class="prospect-checkbox" onclick="toggleProspect(${p.id})">
+                    <input type="checkbox" ${selectedProspects.has(p.id) ? 'checked' : ''} onchange="event.stopPropagation();">
+                    <div class="prospect-info">
+                        <div class="prospect-email">${p.type === 'EMAIL' ? '✉️' : '📱'} ${p.email}</div>
+                        <div class="prospect-company">${p.name}</div>
+                        <div class="prospect-type">${p.company}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterProspects() {
+            const filter = document.getElementById('searchInput').value;
+            renderProspects(filter);
+        }
+        
+        function toggleProspect(id) {
+            if (selectedProspects.has(id)) {
+                selectedProspects.delete(id);
+            } else {
+                selectedProspects.add(id);
+            }
+            renderProspects(document.getElementById('searchInput').value);
+            updateStats();
+        }
+        
+        function selectAll() {
+            const filtered = prospects.filter(p => {
+                const filter = document.getElementById('searchInput').value.toLowerCase();
+                return p.email.toLowerCase().includes(filter) ||
+                       p.company.toLowerCase().includes(filter) ||
+                       p.name.toLowerCase().includes(filter);
+            });
+            filtered.forEach(p => selectedProspects.add(p.id));
+            renderProspects(document.getElementById('searchInput').value);
+            updateStats();
+        }
+        
+        function deselectAll() {
+            selectedProspects.clear();
+            renderProspects(document.getElementById('searchInput').value);
+            updateStats();
+        }
+        
+        function updateStats() {
+            document.getElementById('selectedCount').textContent = selectedProspects.size;
+            document.getElementById('sendBtn').textContent = '🚀 ENVOYER LES EMAILS (' + selectedProspects.size + ' sélectionnés)';
+            document.getElementById('sendBtn').disabled = selectedProspects.size === 0 || isSending;
+        }
+        
+        async function sendAllEmails() {
+            if (isSending || selectedProspects.size === 0) return;
+            
+            isSending = true;
+            document.getElementById('sendBtn').disabled = true;
+            document.getElementById('progressContainer').style.display = 'block';
+            
+            const selected = Array.from(selectedProspects).map(id => prospects.find(p => p.id === id));
+            let sent = 0;
+            let failed = 0;
+            
+            addLog('🚀 Démarrage de l\'envoi (' + selected.length + ' emails)...', 'info');
+            addLog('📧 De: inkframesstudio@gmail.com', 'info');
+            addLog('🎯 Via: FORMSPREE (100% GRATUIT)', 'info');
+            
+            for (let i = 0; i < selected.length; i++) {
+                const prospect = selected[i];
+                const progress = Math.round((i / selected.length) * 100);
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = progress + '%';
+                
+                try {
+                    addLog('📧 Envoi à ' + prospect.email + '...', 'info');
+                    
+                    const emailMessage = `Bonjour,
+
+Je m'appelle Anthony Riga, fondateur d'Ink Frames Studio.
+
+Si vous n'avez pas actuellement de présence en ligne, c'est peut-être votre plus grand risque en 2026.
+
+⚠️ LE VERDICT 2026:
+48% des entreprises sans site web disparaissent en 5 ans!
+
+💻 VOS CLIENTS VOUS CHERCHENT:
+• 87% recherchent d'abord sur Google
+• 73% abandonnent s'il n'y a pas de site
+
+🚀 INK FRAMES STUDIO: 3 PACKS AU CHOIX
+
+🌱 PACK VITRINE (500€)
+- Site ultra-moderne
+- 100% mobile
+- Parfait pour montrer votre activité
+- SANS gestion mensuelle
+
+⭐ PACK STANDARD (2000€ + 199€/mois)
+- Site ultra-premium
+- SEO optimisé
+- Gestion mensuelle complète
+- +30-50% visiteurs en 3 mois
+- +20-40% demandes/appels
+
+🚀 PACK EXPERT (2000€+ + 450€/mois)
+- Tout du pack STANDARD
+- SEO très avancé
+- Modifications illimitées (3/mois)
+- +50-70% visiteurs
+- +40-60% demandes
+
+💳 PAIEMENT FLEXIBLE:
+✓ Intégral (Virement/CB)
+✓ En 3 fois sans frais
+✓ En 4 fois sans frais
+
+🎁 OFFRE LIMITÉE (31 décembre):
+-20% sur la création!
++ Audit gratuit
++ 3 mois gestion offerts
+
+📱 Lien démo: https://17af5774-c8fa-496e-a774-f67b148442a.vercel.app/
+
+📞 06 12 16 19 13
+📧 inkframesstudio@gmail.com
+
+Parlons demain?
+
+Anthony Riga
+Fondateur - Ink Frames Studio`;
+
+                    // Envoi via Formspree avec TON form ID
+                    const response = await fetch(FORMSPREE_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: prospect.email,
+                            name: prospect.name,
+                            company: prospect.company,
+                            message: emailMessage,
+                            _replyto: 'inkframesstudio@gmail.com'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        addLog('✅ Email envoyé à ' + prospect.email + ' (' + prospect.name + ')', 'success');
+                        sent++;
+                        document.getElementById('sentCount').textContent = sent;
+                    } else {
+                        throw new Error('Erreur Formspree: ' + response.status);
+                    }
+                    
+                } catch (error) {
+                    addLog('❌ Erreur: ' + error.message, 'error');
+                    failed++;
+                }
+                
+                // Délai pour éviter les blocages
+                if (i < selected.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                }
+            }
+            
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent = '100%';
+            addLog('🎉 TERMINÉ! ' + sent + ' envoyés, ' + failed + ' échoués', 'success');
+            addLog('💰 COÛT: 0€ (FORMSPREE GRATUIT!)', 'success');
+            
+            isSending = false;
+            updateStats();
+        }
+        
+        function addLog(message, type) {
+            const logBox = document.getElementById('logBox');
+            const item = document.createElement('div');
+            item.className = 'log-item log-' + type;
+            const time = new Date().toLocaleTimeString('fr-FR');
+            item.innerHTML = `<div class="log-time">${time}</div><div>${message}</div>`;
+            logBox.appendChild(item);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+        
+        // Initialisation
+        window.onload = function() {
+            initProspects();
+        };
+    </script>
+</body>
+</html>
